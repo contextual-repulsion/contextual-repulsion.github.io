@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="On-the-fly Repulsion in the Contextual Space for Rich Diversity in Diffusion Transformers.">
+  <meta name="keywords" content="Diffusion, Transformers, Diversity, Contextual Space">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On-the-fly Repulsion in the Contextual Space for Rich Diversity in Diffusion Transformers</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            On-the-fly Repulsion in the Contextual Space for Rich Diversity in Diffusion Transformers
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous Author(s)</span>
+          </div>
+
+          <!-- Publication Links -->
+          <div class="column has-text-centered" style="margin-top: 15px;">
+            <div class="publication-links">
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="has-text-centered">
+        <img src="./static/images/teaser.png" alt="teaser" width="100%">
+      </div>
+      <h2 class="subtitle has-text-centered" style="margin-top: 15px;">
+        <b>TL;DR:</b> Modern text-to-image diffusion transformers are powerful, but surprisingly not very diverse.
+        We identify a novel intervention point within DiT architectures: the <b>Contextual Space</b> at the transformer block level,
+        where the textual tokens are enriched by the emerging generated image.
+        We then introduce a simple and efficient method for achieving rich diversity by repelling a batch of generated images in the Contextual Space.
+      </h2>
+    </div>
+  </div>
+
+  <div class="container container--carousel-wide">
+    <div class="columns is-centered">
+        <div class="content has-text-centered" style="margin-top: 20px;">
+          <div class="image-carousel image-carousel--comparison" id="carousel-fig9">
+            <button type="button" class="carousel-nav carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track-container">
+              <div class="carousel-track">
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/musician.png" alt="A jazz musician playing saxophone in a dimly lit club"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/painter.png" alt="An artist painting a landscape in an outdoor studio"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/scientist.png" alt="A scientist in a modern laboratory"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/crowd.png" alt="A crowd cheering at a sports stadium"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/family.png" alt="A family enjoying a traditional meal together at home"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/garden.png" alt="A beautiful Japanese garden with a koi pond and cherry blossoms"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/singer.png" alt="A jazz singer performing on stage with a vintage microphone"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/market.png" alt="A bustling street market in Morocco with colorful spices"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/students.png" alt="A group of students studying together in a university library"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/warrior.png" alt="A futuristic warrior standing on the edge of a neon-lit cliff"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/wedding.png" alt="A wedding couple sharing a romantic moment"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/chef.png" alt="A chef preparing a gourmet meal in a professional kitchen"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/alien.png" alt="An astronaut exploring the terrain of an alien planet"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/astronaut.png" alt="An astronaut floating in space with Earth in the background"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/bicycle.png" alt="A classic bicycle leaned against an old brick wall"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-prompts/breakfast.png" alt="A delicious breakfast spread served on a wooden table"></div>
+              </div>
+            </div>
+            <button type="button" class="carousel-nav carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-dots" id="carousel-fig9-dots"></div>
+            <p class="figure-caption carousel-caption">"A jazz musician playing saxophone in a dimly lit club"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Modern Text-to-Image (T2I) diffusion models have achieved remarkable semantic alignment,
+            yet they often suffer from a significant lack of variety, converging on a narrow set of visual solutions for any given prompt.
+            This typicality bias presents a challenge for creative applications that require a wide range of generative outcomes.
+          </p>
+          <p>
+            We identify a fundamental trade-off in current approaches to diversity:
+            modifying model inputs requires costly optimization to incorporate feedback from the generative path.
+            In contrast, acting on spatially-committed intermediate latents tends to disrupt the forming visual structure, leading to artifacts.
+            In this work, we propose to apply repulsion in the Contextual Space as a novel framework for achieving rich diversity in Diffusion Transformers.
+            By intervening in the multimodal attention channels, we apply on-the-fly repulsion during the transformer's forward pass,
+            injecting the intervention between blocks where text conditioning is enriched with emergent image structure.
+            This allows for redirecting the guidance trajectory after it is structurally informed but before the composition is fixed.
+          </p>
+          <p>
+            Our results demonstrate that repulsion in the Contextual Space produces significantly richer diversity
+            without sacrificing visual fidelity or semantic adherence.
+            Furthermore, our method is uniquely efficient, imposing a small computational overhead
+            while remaining effective even in modern "Turbo" and distilled models
+            where traditional trajectory-based interventions typically fail.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Intervention Points -->
+    <div class="columns is-centered" style="margin-top: 30px;">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Where Should We Intervene for Diversity?</h2>
+        <div class="has-text-centered" style="margin-top: 20px;">
+          <img src="./static/images/method.png" alt="intervention points" width="80%">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            A key question in improving diversity is <i>where</i> to intervene during the generation process.
+          </p>
+          <p>
+            Upstream methods (a) act by modifying inputs like the noise or the prompt.
+            These inputs carry no information about what the image will actually look like yet, so the intervention is effectively blind.
+            To become useful, they typically require iterative optimization that repeatedly queries the model,
+            which is computationally expensive.
+          </p>
+          <p>
+            Downstream methods (b) act in the image Latent Space, after the image structure is already largely determined.
+            They push samples apart, but since this space is tied to spatial, pixel aligned representations,
+            the repulsion cannot change high level layout or scene structure.
+            Instead, it mostly perturbs local appearance, which often leads to distortions or artifacts.
+            This issue is even more pronounced in Turbo and distilled models,
+            where the structure is often fixed already in the first step.
+          </p>
+          <p>
+            Our approach (c) operates in between these extremes.
+            Inside the transformer blocks, the model maintains enriched textual tokens
+            that are continuously updated based on the emerging image.
+            We call this the <b>Contextual Space</b>.
+            Unlike image latents, this space is semantic and not tied to fixed pixel locations,
+            making it a more effective control point.
+            By applying on-the-fly repulsion in the Contextual Space of each block, we steer the generation
+            while it is still flexible, enabling semantically diverse results with negligible computational cost.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Intervention Points -->
+
+    <!-- Intuition -->
+    <div class="columns is-centered" style="margin-top: 30px;">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">The Contextual Space</h2>
+        <div class="has-text-centered" style="margin-top: 20px;">
+          <img src="./static/images/intuition.png" alt="intuition" width="80%">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            To build intuition, let's look at a simple example: generating images from the prompt <i>"a person with their pet."</i>
+            We take two outputs from the model using different random seeds,
+            which we refer to as a <b>source image</b> and a <b>target image</b>.
+            </p>
+            
+            <p>
+            Now, instead of changing the prompt or the noise, we directly intervene inside the model.
+            We generate new images by taking the internal representation of the source image
+            and gradually interpolating or extrapolating it with respect to the target's representation.
+            </p>
+            
+            <p>
+            When we do this in the <b>Contextual Space</b>, something interesting happens:
+            the model produces a smooth semantic change. For instance, the pet shifts from a dog-like animal to a cat-like one,
+            and the person’s appearance transitions naturally between different ethnic features.
+            </p>
+            
+            <p>
+            We can also go beyond the target using extrapolation. Instead of stopping at the target, we continue
+            moving in the same direction. In this example, this can gradually darken the person's features
+            while moving further from the target's appearance, and at the same time modify the pet
+            in a consistent way, such as deepening its coat color or shifting its ears to a more drooping shape.
+            Importantly, each intermediate image remains sharp and realistic.
+            </p>
+            
+            <p>
+            For context, performing the same operation in the <b>latent space</b> behaves very differently.
+            Instead of a smooth transition, the images tend to mix incompatible structures, leading to
+            blurry or distorted results. When we extrapolate in the latent space, the effect is even more extreme:
+            the representation is pushed outside the learned data manifold, and the image quickly breaks down into severe artifacts.
+            </p>
+            
+            <p>
+            In our work, we generalize this principle from a pair of images to an entire batch.
+            Instead of explicitly extrapolating between two samples, we apply repulsion across
+            the batch in the <b>Contextual Space</b>, encouraging each sample to move in a different
+            semantic direction while preserving image quality.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Intuition -->
+
+    <!-- Ablation -->
+    <div class="columns is-centered" style="margin-top: 50px;">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Repulsion Scale Effect</h2>
+        <div class="has-text-centered" style="margin-top: 15px;">
+          <img class="ablation-image" src="./static/images/scale.png" alt="repulsion scale ablation" width="70%">
+        </div>
+      </div>
+    </div>
+    <!--/ Ablation. -->
+
+    <!-- Comparisons -->
+    <div class="columns is-centered" style="margin-top: 50px;">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Comparisons</h2>
+        <div class="content has-text-centered" style="margin-top: 40px;">
+          <div class="image-carousel image-carousel--small" id="carousel-fig10">
+            <button type="button" class="carousel-nav carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track-container">
+              <div class="carousel-track">
+                <div class="carousel-slide"><img src="./static/images/carousel-comparisons/camera.png" alt="A camera with old photographs"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-comparisons/bus.png" alt="A red London double-decker bus"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-comparisons/phoenix.png" alt="A phoenix rising from ashes"></div>
+                <div class="carousel-slide"><img src="./static/images/carousel-comparisons/wolves.png" alt="A wolf pack howling at the moon"></div>
+              </div>
+            </div>
+            <button type="button" class="carousel-nav carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-dots" id="carousel-fig10-dots"></div>
+            <p class="figure-caption carousel-caption">"A camera with old photographs"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Comparisons. -->
+
+
+  </div>
+</section>
+
+<section class="section is-light" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code></code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website source code based on the <a href="https://nerfies.github.io/">Nerfies</a> project page.
+            If you want to reuse their <a href="https://github.com/nerfies/nerfies.github.io">source code</a>,
+            please credit them appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
