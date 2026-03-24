@@ -168,7 +168,7 @@
             which is computationally expensive.
           </p>
           <p>
-            Downstream methods (b) act in the image Latent Space, after the image structure is already largely determined.
+            Downstream methods (b) act in the image latent space, after the image structure is already largely determined.
             They push samples apart, but since this space is tied to spatial, pixel aligned representations,
             the repulsion cannot change high level layout or scene structure.
             Instead, it mostly perturbs local appearance, which often leads to distortions or artifacts.
@@ -225,9 +225,9 @@
             </p>
             
             <p>
-            For context, performing the same operation in the <b>latent space</b> behaves very differently.
+            For context, performing the same operation in the <b>Latent Space</b> behaves very differently.
             Instead of a smooth transition, the images tend to mix incompatible structures, leading to
-            blurry or distorted results. When we extrapolate in the latent space, the effect is even more extreme:
+            blurry or distorted results. When we extrapolate in the Latent Space, the effect is even more extreme:
             the representation is pushed outside the learned data manifold, and the image quickly breaks down into severe artifacts.
             </p>
             
